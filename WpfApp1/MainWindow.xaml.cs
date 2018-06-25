@@ -23,13 +23,30 @@ namespace WpfApp1
 		public MainWindow()
 		{
 			InitializeComponent();
+			originalKey.Text = "shj hjgu ghju hgju deir ggiutjl hfu dbdhdiouor sdghuiye 123";
 		}
 
 		private bool isCapslock = false;
 		private bool isShift = false;
+		private int speed = 0;
+		private int index = 0;
+		private int fails;
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void SpeedPressKey()
 		{
+			for(; index < userKey.Text.Length; index++)
+			{
+				if(originalKey.Text[index] == userKey.Text[index])
+				{
+					speed += 1;
+					showSpeed.Text = speed.ToString();
+				}
+				else
+				{
+					fails += 1;
+					showFails.Text = fails.ToString();
+				}
+			}
 		}
 
 		private void Keyboard()
@@ -290,8 +307,17 @@ namespace WpfApp1
 				case Key.Back:
 					if (userKey.Text.Length > 0)
 					{
+
 						bBackspace.Background = Brushes.Gray;
 						userKey.Text = userKey.Text.Remove(userKey.Text.Length - 1, 1);
+						if (userKey.Text.Length == 0)
+						{
+							speed = 0;
+							fails = 0;
+							showSpeed.Text = speed.ToString();
+							showFails.Text = fails.ToString();
+						}
+						index -= 1;
 					}
 					break;
 				case Key.Tab:
@@ -708,6 +734,7 @@ namespace WpfApp1
 					break;
 				case Key.Space:
 					bSpace.Background = Brushes.Brown;
+					userKey.Text += " ";
 					break;
 				case Key.RightAlt:
 					bRalt.Background = Brushes.Gray;
@@ -716,6 +743,7 @@ namespace WpfApp1
 					bRCtrl.Background = Brushes.Gray;
 					break;
 			}
+			SpeedPressKey();
 		}
 
 		private void Window_KeyUp(object sender, KeyEventArgs e)
@@ -906,5 +934,18 @@ namespace WpfApp1
 		{
 			showDifficulty.Text = difficulty.Value.ToString();
 		}
+
+		private void buttonStart_Click(object sender, RoutedEventArgs e)
+		{
+			buttonStart.IsEnabled = false;
+			buttonStop.IsEnabled = true;
+		}
+
+		private void buttonStop_Click(object sender, RoutedEventArgs e)
+		{
+			buttonStart.IsEnabled = true;
+			buttonStop.IsEnabled = false;
+		}
+
 	}
 }

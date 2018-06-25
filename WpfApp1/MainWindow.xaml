@@ -32,12 +32,12 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                         <TextBlock Text="Speed: " FontSize="15"/>
-                        <TextBlock Text="0" FontSize="15" FontWeight ="Bold"/>
+                        <TextBlock x:Name="showSpeed" Text="0" FontSize="15" FontWeight ="Bold" Width="25"/>
                         <TextBlock Text=" chars/min" FontSize="15"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                         <TextBlock Text="Fails: " FontSize="15"/>
-                        <TextBlock Text="0" FontSize="15" FontWeight="Bold"/>
+                        <TextBlock x:Name="showFails" Text="0" FontSize="15" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="0" Grid.Column="1" ShowGridLines="False">
@@ -61,13 +61,14 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Margin="0,5,0,5" Content="Start" FontSize="15" Click="Button_Click" />
-                    <Button Grid.Column="1" Margin="5,5,2,5" Content="Stop"
-                            FontSize="15" IsEnabled="False"/>
+                    <Button x:Name="buttonStart" Margin="0,5,0,5" Content="Start"
+                            FontSize="15" Click="buttonStart_Click" />
+                    <Button x:Name="buttonStop" Grid.Column="1" Margin="5,5,2,5" Content="Stop"
+                            FontSize="15" IsEnabled="False" Click="buttonStop_Click"/>
                 </Grid>
             </Grid>
             <StackPanel Grid.Row="1" Background="Aqua">
-                <TextBlock x:Name="oiginalKey" FontSize="25"/>
+                <TextBlock x:Name="originalKey" FontSize="25"/>
                 <TextBlock x:Name="userKey" FontSize="25"/>
             </StackPanel>
         </Grid>
