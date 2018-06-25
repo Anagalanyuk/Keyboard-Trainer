@@ -29,23 +29,23 @@ namespace WpfApp1
 		private bool isCapslock = false;
 		private bool isShift = false;
 		private int speed = 0;
-		private int index = 0;
 		private int fails;
+		private bool isFails = false;
+		private bool isBackspace = true;
 
 		private void SpeedPressKey()
 		{
-			for(; index < userKey.Text.Length; index++)
+			if (originalKey.Text[userKey.Text.Length - 1] == userKey.Text[userKey.Text.Length - 1])
 			{
-				if(originalKey.Text[index] == userKey.Text[index])
-				{
-					speed += 1;
-					showSpeed.Text = speed.ToString();
-				}
-				else
-				{
-					fails += 1;
-					showFails.Text = fails.ToString();
-				}
+				speed += 1;
+				showSpeed.Text = speed.ToString();
+				isFails = false;
+			}
+			else
+			{
+				fails += 1;
+				showFails.Text = fails.ToString();
+				isFails = true;
 			}
 		}
 
@@ -156,6 +156,7 @@ namespace WpfApp1
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
 		{
+			isBackspace = true;
 			switch (e.Key)
 			{
 				case Key.OemTilde:
@@ -307,17 +308,19 @@ namespace WpfApp1
 				case Key.Back:
 					if (userKey.Text.Length > 0)
 					{
-
 						bBackspace.Background = Brushes.Gray;
-						userKey.Text = userKey.Text.Remove(userKey.Text.Length - 1, 1);
-						if (userKey.Text.Length == 0)
+						if (userKey.Text[userKey.Text.Length - 1] == originalKey.Text[userKey.Text.Length - 1])
 						{
-							speed = 0;
-							fails = 0;
-							showSpeed.Text = speed.ToString();
-							showFails.Text = fails.ToString();
+							speed -= 1;
 						}
-						index -= 1;
+						else
+						{
+							fails -= 1;
+						}
+						userKey.Text = userKey.Text.Remove(userKey.Text.Length - 1, 1);
+						showSpeed.Text = speed.ToString();
+						showFails.Text = fails.ToString();
+						isBackspace = false;
 					}
 					break;
 				case Key.Tab:
@@ -743,7 +746,10 @@ namespace WpfApp1
 					bRCtrl.Background = Brushes.Gray;
 					break;
 			}
-			SpeedPressKey();
+			if (isBackspace && userKey.Text.Length > 0)
+			{
+				SpeedPressKey();
+			}
 		}
 
 		private void Window_KeyUp(object sender, KeyEventArgs e)

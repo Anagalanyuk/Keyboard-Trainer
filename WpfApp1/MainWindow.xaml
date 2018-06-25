@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                         <TextBlock Text="Speed: " FontSize="15"/>
-                        <TextBlock x:Name="showSpeed" Text="0" FontSize="15" FontWeight ="Bold" Width="25"/>
+                        <TextBlock x:Name="showSpeed" Text="0" FontSize="15" FontWeight ="Bold"/>
                         <TextBlock Text=" chars/min" FontSize="15"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
