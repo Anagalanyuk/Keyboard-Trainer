@@ -47,9 +47,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <TextBlock Text="Difficulty: " FontSize="15"/>
-                        <TextBlock Text="0" FontSize="15" FontWeight="Bold"/>
-                        <Slider Minimum="4" Maximum="10" Width="80"
-                                Margin="10,3,0,0"/>
+                        <TextBlock x:Name="showDifficulty" Text="4" FontSize="15" FontWeight="Bold" Width="25"/>
+                        <Slider x:Name="difficulty" Minimum="4" Maximum="100" Width="70"
+                                Margin="0,3,0,0" ValueChanged="difficulty_ValueChanged" SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal">
                         <CheckBox Margin="3"/>
@@ -67,8 +67,8 @@
                 </Grid>
             </Grid>
             <StackPanel Grid.Row="1" Background="Aqua">
-                <TextBlock Text="hello" FontSize="25"/>
-                <TextBlock Text="world" FontSize="25"/>
+                <TextBlock x:Name="oiginalKey" FontSize="25"/>
+                <TextBlock x:Name="userKey" FontSize="25"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">
@@ -79,15 +79,15 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,-6,0,6">
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
                 <Border x:Name="bTilda" HorizontalAlignment="Left" Background="Pink" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="`" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tTilda" Text="`" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b1" HorizontalAlignment="Left" Background="Pink" 
                     Width="40" Height="40" 
@@ -95,18 +95,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="1" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t1" Text="1" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b2" HorizontalAlignment="Left" Background="Pink" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="2" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t2" Text="2" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b3" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
@@ -114,18 +114,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                         Margin="5">
-                    <TextBlock Text="3" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t3"  Text="3" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b4" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="4" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t4"  Text="4" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b5" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
@@ -133,18 +133,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="5" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t5"  Text="5" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b6" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="6" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t6"  Text="6" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b7" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
@@ -152,18 +152,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="7" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t7"  Text="7" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b8" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="8" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t8"  Text="8" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b9" HorizontalAlignment="Left" Background="Pink" 
                     Width="40" Height="40" 
@@ -171,18 +171,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="9" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t9"  Text="9" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="b0" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="0" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="t0"  Text="0" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bMinus" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -190,18 +190,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="-" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tMinus" Text="-" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bPlus" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="=" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tPlus" Text="=" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bBackspace" HorizontalAlignment="Left" Background="LightGray" 
                     Width="80" Height="40" 
@@ -209,7 +209,7 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="Backspace" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tBackspace" Text="Backspace" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
                            FontSize="15"/>
                 </Border>
@@ -230,18 +230,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="q" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tQ" Text="q" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bW" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="w" HorizontalAlignment="Center" 
+                    <TextBlock  x:Name="tW" Text="w" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bE" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -249,18 +249,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="e" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tE" Text="e" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bR" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="r" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tR" Text="r" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bT" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
@@ -268,18 +268,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="t" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tT" Text="t" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bY" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="y" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tY" Text="y" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bU" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
@@ -287,18 +287,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="u" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tU" Text="u" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bI" HorizontalAlignment="Left" Background="LightPink" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="i" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tI" Text="i" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bO" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
@@ -306,18 +306,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="o" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tO" Text="o" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bP" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="p" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tP" Text="p" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bOpenBrackets" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -325,18 +325,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="[" HorizontalAlignment="Center"
+                    <TextBlock x:Name="tOpenBrackets" Text="[" HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bCloseBrackets" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="]" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tCloseBrackets" Text="]" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bPipe" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="60" Height="40" 
@@ -344,9 +344,9 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="\" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tPipe" Text="\" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
@@ -365,18 +365,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="a" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tA" Text="a" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bS" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="s" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tS" Text="s" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bD" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -384,18 +384,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="d" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tD" Text="d" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bF" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="f" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tF" Text="f" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bG" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
@@ -403,18 +403,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="g" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tG" Text="g" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bH" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="h" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tH" Text="h" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bJ" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
@@ -422,18 +422,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="j" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tJ" Text="j" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bK" HorizontalAlignment="Left" Background="LightPink" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="k" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tK" Text="k" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bL" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
@@ -441,18 +441,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="l" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tL" Text="l" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bSemicolon" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text=";" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tSemicolon" Text=";" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bQuotes" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -460,9 +460,9 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="'" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tQuotes" Text="'" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bEnter" HorizontalAlignment="Left" Background="LightGray" 
                     Width="83" Height="40" 
@@ -490,18 +490,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="z" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tZ" Text="z" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bX" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="x" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tX" Text="x" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bC" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
@@ -509,18 +509,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="c" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tC" Text="c" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bV" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="v" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tV" Text="v" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bB" HorizontalAlignment="Left" Background="DeepSkyBlue" 
                     Width="40" Height="40" 
@@ -528,18 +528,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="b" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tB" Text="b" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bN" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="n" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tN" Text="n" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bM" HorizontalAlignment="Left" Background="MediumPurple" 
                     Width="40" Height="40" 
@@ -547,18 +547,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="m" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tM" Text="m" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bComma" HorizontalAlignment="Left" Background="LightPink" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="," HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tComma" Text="," HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bPeriod" HorizontalAlignment="Left" Background="Yellow" 
                     Width="40" Height="40" 
@@ -566,18 +566,18 @@
                     BorderBrush="Black"
                     BorderThickness="2"
                     Margin="5">
-                    <TextBlock Text="." HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tPeriod" Text="." HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bQuestion" HorizontalAlignment="Left" Background="GreenYellow" 
                     Width="40" Height="40" 
                     CornerRadius="8"
                     BorderBrush="Black"
                     BorderThickness="2">
-                    <TextBlock Text="/" HorizontalAlignment="Center" 
+                    <TextBlock x:Name="tQuestion" Text="/" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"
-                           FontSize="30"/>
+                           FontSize="25"/>
                 </Border>
                 <Border x:Name="bRShift" HorizontalAlignment="Left" Background="LightGray" 
                     Width="105" Height="40" 
