@@ -49,10 +49,10 @@
                         <TextBlock Text="Difficulty: " FontSize="15"/>
                         <TextBlock x:Name="showDifficulty" Text="4" FontSize="15" FontWeight="Bold" Width="25"/>
                         <Slider x:Name="difficulty" Minimum="4" Maximum="94" Width="70"
-                                Margin="0,3,0,0" ValueChanged="difficulty_ValueChanged" SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1"/>
+                                Margin="0,3,0,0" ValueChanged="Difficulty_ValueChanged" SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Width="169">
-                        <CheckBox x:Name="caseSensitive" Margin="3" Checked="caseSensitive_Checked"/>
+                        <CheckBox x:Name="caseSensitive" Margin="3" Checked="CaseSensitive_Checked"/>
                         <TextBlock Text="Case Sensitive" FontSize="15" />
                     </StackPanel>
                 </Grid>
@@ -62,9 +62,9 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button x:Name="buttonStart" Margin="0,5,0,5" Content="Start"
-                            FontSize="15" Click="buttonStart_Click" />
+                            FontSize="15" Click="ButtonStart_Click" />
                     <Button x:Name="buttonStop" Grid.Column="1" Margin="5,5,2,5" Content="Stop"
-                            FontSize="15" IsEnabled="False" Click="buttonStop_Click"/>
+                            FontSize="15" IsEnabled="False" Click="ButtonStop_Click"/>
                 </Grid>
             </Grid>
             <StackPanel Grid.Row="1" Background="Aqua">

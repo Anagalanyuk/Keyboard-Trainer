@@ -14,18 +14,83 @@ namespace WpfApp1
 		{
 			InitializeComponent();
 		}
-
-		private bool isCapslock = false;
-		private bool isShift = false;
-		private int speed;
 		private int fails;
 		private bool isBackspace = false;
+		private bool isCapslock = false;
 		private bool isOnKeyboard = false;
-		private bool isSpeed = false;
 		private bool isSensitive;
+		private bool isShift = false;
+		private bool isSpeed = false;
+		private int speed;
 		char symbolCorrect;
 
-		private void SpeedPressKey()
+		private void ButtonStart_Click(object sender, RoutedEventArgs e)
+		{
+			buttonStart.IsEnabled = false;
+			buttonStop.IsEnabled = true;
+			caseSensitive.IsEnabled = false;
+			difficulty.IsEnabled = false;
+			isOnKeyboard = true;
+			OriginalString();
+		}
+
+		private void ButtonStop_Click(object sender, RoutedEventArgs e)
+		{
+			buttonStart.IsEnabled = true;
+			buttonStop.IsEnabled = false;
+			caseSensitive.IsEnabled = true;
+			difficulty.IsEnabled = true;
+			fails = 0;
+			isCapslock = false;
+			isOnKeyboard = false;
+			originalKey.Text = "";
+			showFails.Text = fails.ToString();
+			showSpeed.Text = speed.ToString();
+			speed = 0;
+			userKey.Text = "";
+		}
+
+		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
+		{
+			isSensitive = true;
+		}
+
+		private void Difficulty_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+		{
+			showDifficulty.Text = difficulty.Value.ToString();
+		}
+
+		private void OriginalString()
+		{
+			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
+			for (int index = 1; originalKey.Text.Length < 48; index++)
+			{
+				if (!isSensitive)
+				{
+					char symbol = (char)symbolNumber.Next(97, 122);
+					originalKey.Text += symbol;
+					if (index % difficulty.Value == 0)
+					{
+						originalKey.Text += " ";
+						originalKey.Text += symbol;
+						++index;
+					}
+				}
+				else
+				{
+					char symbol = (char)symbolNumber.Next(33, 126);
+					originalKey.Text += symbol;
+					if (index % difficulty.Value == 0)
+					{
+						originalKey.Text += " ";
+						originalKey.Text += symbol;
+						++index;
+					}
+				}
+			}
+		}
+
+		private void SpeedFails()
 		{
 			if (isSpeed)
 			{
@@ -217,7 +282,6 @@ namespace WpfApp1
 								isSpeed = true;
 							}
 						}
-
 						break;
 					case Key.D3:
 						b3.Background = Brushes.YellowGreen;
@@ -1209,7 +1273,7 @@ namespace WpfApp1
 				}
 				if (!isBackspace)
 				{
-					SpeedPressKey();
+					SpeedFails();
 				}
 				isBackspace = false;
 			}
@@ -1447,73 +1511,6 @@ namespace WpfApp1
 						break;
 				}
 			}
-		}
-
-		private void difficulty_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-		{
-			showDifficulty.Text = difficulty.Value.ToString();
-		}
-
-		private void buttonStart_Click(object sender, RoutedEventArgs e)
-		{
-			difficulty.IsEnabled = false;
-			buttonStart.IsEnabled = false;
-			buttonStop.IsEnabled = true;
-			isOnKeyboard = true;
-			caseSensitive.IsEnabled = false;
-			OriginalString();
-
-		}
-
-		private void OriginalString()
-		{
-			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
-			for (int index = 1; originalKey.Text.Length < 48; index++)
-			{
-				if (!isSensitive)
-				{
-					char symbol = (char)symbolNumber.Next(97, 122);
-					originalKey.Text += symbol;
-					if (index % difficulty.Value == 0)
-					{
-						originalKey.Text += " ";
-						originalKey.Text += symbol;
-						++index;
-					}
-				}
-				else
-				{
-					char symbol = (char)symbolNumber.Next(33, 126);
-					originalKey.Text += symbol;
-					if (index % difficulty.Value == 0)
-					{
-						originalKey.Text += " ";
-						originalKey.Text += symbol;
-						++index;
-					}
-				}
-			}
-		}
-
-		private void buttonStop_Click(object sender, RoutedEventArgs e)
-		{
-			difficulty.IsEnabled = true;
-			speed = 0;
-			fails = 0;
-			showSpeed.Text = speed.ToString();
-			showFails.Text = fails.ToString();
-			originalKey.Text = "";
-			userKey.Text = "";
-			isCapslock = false;
-			isOnKeyboard = false;
-			caseSensitive.IsEnabled = true;
-			buttonStart.IsEnabled = true;
-			buttonStop.IsEnabled = false;
-		}
-
-		private void caseSensitive_Checked(object sender, RoutedEventArgs e)
-		{
-			isSensitive = true;
 		}
 	}
 }
