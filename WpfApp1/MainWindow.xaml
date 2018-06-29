@@ -48,11 +48,11 @@
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <TextBlock Text="Difficulty: " FontSize="15"/>
                         <TextBlock x:Name="showDifficulty" Text="4" FontSize="15" FontWeight="Bold" Width="25"/>
-                        <Slider x:Name="difficulty" Minimum="4" Maximum="100" Width="70"
+                        <Slider x:Name="difficulty" Minimum="4" Maximum="94" Width="70"
                                 Margin="0,3,0,0" ValueChanged="difficulty_ValueChanged" SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <CheckBox Margin="3"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Width="169">
+                        <CheckBox x:Name="caseSensitive" Margin="3" Checked="caseSensitive_Checked"/>
                         <TextBlock Text="Case Sensitive" FontSize="15" />
                     </StackPanel>
                 </Grid>
@@ -68,8 +68,8 @@
                 </Grid>
             </Grid>
             <StackPanel Grid.Row="1" Background="Aqua">
-                <TextBlock x:Name="originalKey" FontSize="25"/>
-                <TextBlock x:Name="userKey" FontSize="25"/>
+                <TextBlock x:Name="originalKey" FontSize="25" Width="683" FontFamily="Consolas"/>
+                <TextBlock x:Name="userKey" FontSize="25" FontFamily="Consolas"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2">

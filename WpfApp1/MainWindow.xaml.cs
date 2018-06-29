@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WpfApp1
 {
@@ -23,33 +13,34 @@ namespace WpfApp1
 		public MainWindow()
 		{
 			InitializeComponent();
-			originalKey.Text = "shj hjgu ghju hgju deir ggiutjl hfu dbdhdiouor sdghuiye 123";
 		}
 
 		private bool isCapslock = false;
 		private bool isShift = false;
-		private int speed = 0;
+		private int speed;
 		private int fails;
-		private bool isFails = false;
-		private bool isBackspace = true;
+		private bool isBackspace = false;
+		private bool isOnKeyboard = false;
+		private bool isSpeed = false;
+		private bool isSensitive;
+		char symbolCorrect;
 
 		private void SpeedPressKey()
 		{
-			if (originalKey.Text[userKey.Text.Length - 1] == userKey.Text[userKey.Text.Length - 1])
+			if (isSpeed)
 			{
 				speed += 1;
 				showSpeed.Text = speed.ToString();
-				isFails = false;
+				isSpeed = false;
 			}
 			else
 			{
 				fails += 1;
 				showFails.Text = fails.ToString();
-				isFails = true;
 			}
 		}
 
-		private void Keyboard()
+		private void ShowKeyboard()
 		{
 			if (isShift || isCapslock)
 			{
@@ -156,783 +147,1305 @@ namespace WpfApp1
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
 		{
-			isBackspace = true;
-			switch (e.Key)
+			if (isOnKeyboard)
 			{
-				case Key.OemTilde:
-					bTilda.Background = Brushes.DeepPink;
-					if (isShift)
-					{
-						userKey.Text += "~";
-					}
-					else
-					{
-						userKey.Text += "`";
-					}
-					break;
-				case Key.D1:
-					b1.Background = Brushes.DeepPink;
-					if (isShift)
-					{
-						userKey.Text += "!";
-					}
-					else
-					{
-						userKey.Text += "1";
-					}
-					break;
-				case Key.D2:
-					b2.Background = Brushes.DeepPink;
-					if (isShift)
-					{
-						userKey.Text += "@";
-					}
-					else
-					{
-						userKey.Text += "2";
-					}
-
-					break;
-				case Key.D3:
-					b3.Background = Brushes.YellowGreen;
-					if (isShift)
-					{
-						userKey.Text += "#";
-					}
-					else
-					{
-						userKey.Text += "3";
-
-					}
-					break;
-				case Key.D4:
-					b4.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "$";
-					}
-					else
-					{
-						userKey.Text += "4";
-					}
-					break;
-				case Key.D5:
-					b5.Background = Brushes.Blue;
-					if (isShift)
-					{
-						userKey.Text += "%";
-					}
-					else
-					{
-						userKey.Text += "5";
-					}
-
-					break;
-				case Key.D6:
-					b6.Background = Brushes.Blue;
-					if (isShift)
-					{
-						userKey.Text += "^";
-					}
-					else
-					{
-						userKey.Text += "6";
-					}
-					break;
-				case Key.D7:
-					b7.Background = Brushes.Purple;
-					if (isShift)
-					{
-						userKey.Text += "&";
-					}
-					else
-					{
-						userKey.Text += "7";
-					}
-					break;
-				case Key.D8:
-					b8.Background = Brushes.Purple;
-					if (isShift)
-					{
-						userKey.Text += "*";
-					}
-					else
-					{
-						userKey.Text += "8";
-					}
-					break;
-				case Key.D9:
-					b9.Background = Brushes.DeepPink;
-					if (isShift)
-					{
-						userKey.Text += "(";
-					}
-					else
-					{
-						userKey.Text += "9";
-					}
-					break;
-				case Key.D0:
-					b0.Background = Brushes.YellowGreen;
-					if (isShift)
-					{
-						userKey.Text += ")";
-					}
-					else
-					{
-						userKey.Text += "0";
-					}
-					break;
-				case Key.OemMinus:
-					bMinus.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "_";
-					}
-					else
-					{
-						userKey.Text += "-";
-					}
-					break;
-				case Key.OemPlus:
-					bPlus.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "+";
-					}
-					else
-					{
-						userKey.Text += "=";
-					}
-					break;
-				case Key.Back:
-					if (userKey.Text.Length > 0)
-					{
-						bBackspace.Background = Brushes.Gray;
-						if (userKey.Text[userKey.Text.Length - 1] == originalKey.Text[userKey.Text.Length - 1])
+				if (userKey.Text.Length == originalKey.Text.Length)
+				{
+					userKey.Text = "";
+				}
+				switch (e.Key)
+				{
+					case Key.OemTilde:
+						bTilda.Background = Brushes.DeepPink;
+						if (isShift)
 						{
-							speed -= 1;
+							symbolCorrect = '~';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += "~";
+								isSpeed = true;
+							}
 						}
 						else
 						{
-							fails -= 1;
+							symbolCorrect = '`';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += "`";
+								isSpeed = true;
+							}
 						}
-						userKey.Text = userKey.Text.Remove(userKey.Text.Length - 1, 1);
-						showSpeed.Text = speed.ToString();
-						showFails.Text = fails.ToString();
-						isBackspace = false;
-					}
-					break;
-				case Key.Tab:
-					bTab.Background = Brushes.Gray;
-					break;
-				case Key.Q:
-					bQ.Background = Brushes.DeepPink;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "Q";
-					}
-					else
-					{
-						userKey.Text += "q";
-					}
-					break;
-				case Key.W:
-					bW.Background = Brushes.YellowGreen;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "W";
-					}
-					else
-					{
-						userKey.Text += "w";
-					}
-					break;
-				case Key.E:
-					bE.Background = Brushes.Green;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "E";
-					}
-					else
-					{
-						userKey.Text += "e";
-					}
-					break;
-				case Key.R:
-					bR.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "R";
-					}
-					else
-					{
-						userKey.Text += "r";
-					}
-					break;
-				case Key.T:
-					bT.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "T";
-					}
-					else
-					{
-						userKey.Text += "t";
-					}
-					break;
-				case Key.Y:
-					bY.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "Y";
-					}
-					else
-					{
-						userKey.Text += "y";
-					}
-					break;
-				case Key.U:
-					bU.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "U";
-					}
-					else
-					{
-						userKey.Text += "u";
-					}
-					break;
-				case Key.I:
-					bI.Background = Brushes.DeepPink;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "I";
-					}
-					else
-					{
-						userKey.Text += "i";
-					}
-					break;
-				case Key.O:
-					bO.Background = Brushes.YellowGreen;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "O";
-					}
-					else
-					{
-						userKey.Text += "0";
-					}
-					break;
-				case Key.P:
-					bP.Background = Brushes.Green;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "P";
-					}
-					else
-					{
-						userKey.Text += "p";
-					}
-					break;
-				case Key.OemOpenBrackets:
-					bOpenBrackets.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "{";
-					}
-					else
-					{
-						userKey.Text += "[";
-					}
-					break;
-				case Key.OemCloseBrackets:
-					bCloseBrackets.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "}";
-					}
-					else
-					{
-						userKey.Text += "]";
-					}
-					break;
-				case Key.OemPipe:
-					bPipe.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "|";
-					}
-					else
-					{
-						userKey.Text += "\\";
-					}
-					break;
-				case Key.CapsLock:
-					if (!isCapslock)
-					{
-						bCapsLock.Background = Brushes.Gray;
-						isCapslock = true;
-						Keyboard();
-					}
-					else
-					{
-						bCapsLock.Background = Brushes.LightGray;
-						isCapslock = false;
-						Keyboard();
-					}
-					break;
-				case Key.A:
-					bA.Background = Brushes.DeepPink;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "A";
-					}
-					else
-					{
-						userKey.Text += "a";
-					}
-					break;
-				case Key.S:
-					bS.Background = Brushes.YellowGreen;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "S";
-					}
-					else
-					{
-						userKey.Text += "s";
-					}
-					break;
-				case Key.D:
-					bD.Background = Brushes.Green;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "D";
-					}
-					else
-					{
-						userKey.Text += "d";
-					}
-					break;
-				case Key.F:
-					bF.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "F";
-					}
-					else
-					{
-						userKey.Text += "f";
-					}
-					break;
-				case Key.G:
-					bG.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "G";
-					}
-					else
-					{
-						userKey.Text += "g";
-					}
-					break;
-				case Key.H:
-					bH.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "H";
-					}
-					else
-					{
-						userKey.Text += "h";
-					}
-					break;
-				case Key.J:
-					bJ.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "J";
-					}
-					else
-					{
-						userKey.Text += "j";
-					}
-					break;
-				case Key.K:
-					bK.Background = Brushes.DeepPink;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "K";
-					}
-					else
-					{
-						userKey.Text += "k";
-					}
-					break;
-				case Key.L:
-					bL.Background = Brushes.YellowGreen;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "L";
-					}
-					else
-					{
-						userKey.Text += "l";
-					}
-					break;
-				case Key.OemSemicolon:
-					bSemicolon.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += ":";
-					}
-					else
-					{
-						userKey.Text += ";";
-					}
-					break;
-				case Key.OemQuotes:
-					bQuotes.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "\"";
-					}
-					else
-					{
-						userKey.Text += "'";
-					}
-					break;
-				case Key.Enter:
-					bEnter.Background = Brushes.Gray;
-					break;
-				case Key.LeftShift:
-					isShift = true;
-					bLShift.Background = Brushes.Gray;
-					break;
-				case Key.Z:
-					bZ.Background = Brushes.DeepPink;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "Z";
-					}
-					else
-					{
-						userKey.Text += "z";
-					}
-					break;
-				case Key.X:
-					bX.Background = Brushes.YellowGreen;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "X";
-					}
-					else
-					{
-						userKey.Text += "x";
-					}
-					break;
-				case Key.C:
-					bC.Background = Brushes.Green;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "C";
-					}
-					else
-					{
-						userKey.Text += "c";
-					}
-					break;
-				case Key.V:
-					bV.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "V";
-					}
-					else
-					{
-						userKey.Text += "v";
-					}
-					break;
-				case Key.B:
-					bB.Background = Brushes.Blue;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "B";
-					}
-					else
-					{
-						userKey.Text += "b";
-					}
-					break;
-				case Key.N:
-					bN.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "N";
-					}
-					else
-					{
-						userKey.Text += "n";
-					}
-					break;
-				case Key.M:
-					bM.Background = Brushes.Purple;
-					if (isCapslock || isShift)
-					{
-						userKey.Text += "M";
-					}
-					else
-					{
-						userKey.Text += "m";
-					}
-					break;
-				case Key.OemComma:
-					bComma.Background = Brushes.DeepPink;
-					if (isShift)
-					{
-						userKey.Text += "<";
-					}
-					else
-					{
-						userKey.Text += ",";
-					}
-					break;
-				case Key.OemPeriod:
-					bPeriod.Background = Brushes.YellowGreen;
-					if (isShift)
-					{
-						userKey.Text += ">";
-					}
-					else
-					{
-						userKey.Text += ".";
-					}
-					break;
-				case Key.OemQuestion:
-					bQuestion.Background = Brushes.Green;
-					if (isShift)
-					{
-						userKey.Text += "?";
-					}
-					else
-					{
-						userKey.Text += "/";
-					}
-					break;
-				case Key.RightShift:
-					isShift = true;
-					bRShift.Background = Brushes.Gray;
-					Keyboard();
-					break;
-				case Key.LeftCtrl:
-					bLCtrl.Background = Brushes.Gray;
-					break;
-				case Key.LWin:
-					bLWin.Background = Brushes.Gray;
-					break;
-				case Key.LeftAlt:
-					bLAlt.Background = Brushes.Gray;
-					break;
-				case Key.Space:
-					bSpace.Background = Brushes.Brown;
-					userKey.Text += " ";
-					break;
-				case Key.RightAlt:
-					bRalt.Background = Brushes.Gray;
-					break;
-				case Key.RightCtrl:
-					bRCtrl.Background = Brushes.Gray;
-					break;
+						break;
+					case Key.D1:
+						b1.Background = Brushes.DeepPink;
+						if (isShift)
+						{
+							symbolCorrect = '!';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '1';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D2:
+						b2.Background = Brushes.DeepPink;
+						if (isShift)
+						{
+							symbolCorrect = '@';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '2';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+
+						break;
+					case Key.D3:
+						b3.Background = Brushes.YellowGreen;
+						if (isShift)
+						{
+							symbolCorrect = '#';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '3';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D4:
+						b4.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '$';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '4';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D5:
+						b5.Background = Brushes.Blue;
+						if (isShift)
+						{
+							symbolCorrect = '%';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '5';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+
+						break;
+					case Key.D6:
+						b6.Background = Brushes.Blue;
+						if (isShift)
+						{
+							symbolCorrect = '^';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '6';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D7:
+						b7.Background = Brushes.Purple;
+						if (isShift)
+						{
+							symbolCorrect = '&';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '7';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D8:
+						b8.Background = Brushes.Purple;
+						if (isShift)
+						{
+							symbolCorrect = '*';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '8';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D9:
+						b9.Background = Brushes.DeepPink;
+						if (isShift)
+						{
+							symbolCorrect = '(';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '9';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D0:
+						b0.Background = Brushes.YellowGreen;
+						if (isShift)
+						{
+							symbolCorrect = ')';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '0';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemMinus:
+						bMinus.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '_';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '-';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemPlus:
+						bPlus.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '+';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '=';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.Back:
+						bBackspace.Background = Brushes.Gray;
+						isBackspace = true;
+						break;
+					case Key.Tab:
+						bTab.Background = Brushes.Gray;
+						break;
+					case Key.Q:
+						bQ.Background = Brushes.DeepPink;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'Q';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'q';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.W:
+						bW.Background = Brushes.YellowGreen;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'W';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'w';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.E:
+						bE.Background = Brushes.Green;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'E';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'e';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.R:
+						bR.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'R';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'r';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.T:
+						bT.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'T';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 't';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.Y:
+						bY.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'Y';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'y';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.U:
+						bU.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'U';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'u';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.I:
+						bI.Background = Brushes.DeepPink;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'I';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'i';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.O:
+						bO.Background = Brushes.YellowGreen;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'O';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'o';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.P:
+						bP.Background = Brushes.Green;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'P';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'p';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemOpenBrackets:
+						bOpenBrackets.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '{';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '[';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemCloseBrackets:
+						bCloseBrackets.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '}';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = ']';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemPipe:
+						bPipe.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '|';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '\\';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.CapsLock:
+						if (!isCapslock)
+						{
+							bCapsLock.Background = Brushes.Gray;
+							isCapslock = true;
+							ShowKeyboard();
+						}
+						else
+						{
+							bCapsLock.Background = Brushes.LightGray;
+							isCapslock = false;
+							ShowKeyboard();
+						}
+						break;
+					case Key.A:
+						bA.Background = Brushes.DeepPink;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'A';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'a';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.S:
+						bS.Background = Brushes.YellowGreen;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'S';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 's';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.D:
+						bD.Background = Brushes.Green;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'D';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'd';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.F:
+						bF.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'F';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'f';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.G:
+						bG.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'g';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'g';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.H:
+						bH.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'H';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+							symbolCorrect = 'h';
+						if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+						{
+							userKey.Text += symbolCorrect;
+							isSpeed = true;
+						}
+						break;
+					case Key.J:
+						bJ.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'J';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'j';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.K:
+						bK.Background = Brushes.DeepPink;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'K';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'k';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.L:
+						bL.Background = Brushes.YellowGreen;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'L';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'l';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							};
+						}
+						break;
+					case Key.OemSemicolon:
+						bSemicolon.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = ':';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = ';';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemQuotes:
+						bQuotes.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '\"';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '\'';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.Enter:
+						bEnter.Background = Brushes.Gray;
+						break;
+					case Key.LeftShift:
+						isShift = true;
+						ShowKeyboard();
+						bLShift.Background = Brushes.Gray;
+						break;
+					case Key.Z:
+						bZ.Background = Brushes.DeepPink;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'Z';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'z';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.X:
+						bX.Background = Brushes.YellowGreen;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'X';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'x';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.C:
+						bC.Background = Brushes.Green;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'C';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'c';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.V:
+						bV.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'V';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'v';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.B:
+						bB.Background = Brushes.Blue;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'B';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'b';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.N:
+						bN.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'N';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'n';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.M:
+						bM.Background = Brushes.Purple;
+						if (isCapslock || isShift)
+						{
+							symbolCorrect = 'M';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = 'm';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemComma:
+						bComma.Background = Brushes.DeepPink;
+						if (isShift)
+						{
+							symbolCorrect = '<';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = ',';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemPeriod:
+						bPeriod.Background = Brushes.YellowGreen;
+						if (isShift)
+						{
+							symbolCorrect = '>';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '.';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.OemQuestion:
+						bQuestion.Background = Brushes.Green;
+						if (isShift)
+						{
+							symbolCorrect = '?';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						else
+						{
+							symbolCorrect = '/';
+							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							{
+								userKey.Text += symbolCorrect;
+								isSpeed = true;
+							}
+						}
+						break;
+					case Key.RightShift:
+						isShift = true;
+						bRShift.Background = Brushes.Gray;
+						ShowKeyboard();
+						break;
+					case Key.LeftCtrl:
+						bLCtrl.Background = Brushes.Gray;
+						break;
+					case Key.LWin:
+						bLWin.Background = Brushes.Gray;
+						break;
+					case Key.LeftAlt:
+						bLAlt.Background = Brushes.Gray;
+						break;
+					case Key.Space:
+						bSpace.Background = Brushes.Brown;
+						symbolCorrect = ' ';
+						if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+						{
+							userKey.Text += symbolCorrect;
+							isSpeed = true;
+						}
+						break;
+					case Key.RightAlt:
+						bRalt.Background = Brushes.Gray;
+						break;
+					case Key.RightCtrl:
+						bRCtrl.Background = Brushes.Gray;
+						break;
+				}
+				if (userKey.Text.Length == originalKey.Text.Length)
+				{
+					originalKey.Text = "";
+					OriginalString();
+					userKey.Text = "";
+				}
+				if (!isBackspace)
+				{
+					SpeedPressKey();
+				}
+				isBackspace = false;
 			}
-			if (isBackspace && userKey.Text.Length > 0)
+			else
 			{
-				SpeedPressKey();
+				switch (e.Key)
+				{
+					case Key.CapsLock:
+						if (!isCapslock)
+						{
+							bCapsLock.Background = Brushes.Gray;
+							isCapslock = true;
+							ShowKeyboard();
+						}
+						else
+						{
+							bCapsLock.Background = Brushes.LightGray;
+							isCapslock = false;
+							ShowKeyboard();
+						}
+						break;
+					case Key.LeftShift:
+						isShift = true;
+						ShowKeyboard();
+						bLShift.Background = Brushes.Gray;
+						break;
+					case Key.RightShift:
+						isShift = true;
+						bRShift.Background = Brushes.Gray;
+						ShowKeyboard();
+						break;
+				}
 			}
 		}
 
 		private void Window_KeyUp(object sender, KeyEventArgs e)
 		{
-			switch (e.Key)
+			if (isOnKeyboard)
 			{
-				case Key.OemTilde:
-					bTilda.Background = Brushes.Pink;
-					break;
-				case Key.D1:
-					b1.Background = Brushes.Pink;
-					break;
-				case Key.D2:
-					b2.Background = Brushes.Pink;
-					break;
-				case Key.D3:
-					b3.Background = Brushes.Yellow;
-					break;
-				case Key.D4:
-					b4.Background = Brushes.GreenYellow;
-					break;
-				case Key.D5:
-					b5.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.D6:
-					b6.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.D7:
-					b7.Background = Brushes.MediumPurple;
-					break;
-				case Key.D8:
-					b8.Background = Brushes.MediumPurple;
-					break;
-				case Key.D9:
-					b9.Background = Brushes.Pink;
-					break;
-				case Key.D0:
-					b0.Background = Brushes.Yellow;
-					break;
-				case Key.OemMinus:
-					bMinus.Background = Brushes.GreenYellow;
-					break;
-				case Key.OemPlus:
-					bPlus.Background = Brushes.GreenYellow;
-					break;
-				case Key.Back:
-					bBackspace.Background = Brushes.LightGray;
-					break;
-				case Key.Tab:
-					bTab.Background = Brushes.LightGray;
-					break;
-				case Key.Q:
-					bQ.Background = Brushes.Pink;
-					break;
-				case Key.W:
-					bW.Background = Brushes.Yellow;
-					break;
-				case Key.E:
-					bE.Background = Brushes.GreenYellow;
-					break;
-				case Key.R:
-					bR.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.T:
-					bT.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.Y:
-					bY.Background = Brushes.MediumPurple;
-					break;
-				case Key.U:
-					bU.Background = Brushes.MediumPurple;
-					break;
-				case Key.I:
-					bI.Background = Brushes.Pink;
-					break;
-				case Key.O:
-					bO.Background = Brushes.Yellow;
-					break;
-				case Key.P:
-					bP.Background = Brushes.GreenYellow;
-					break;
-				case Key.OemOpenBrackets:
-					bOpenBrackets.Background = Brushes.GreenYellow;
-					break;
-				case Key.OemCloseBrackets:
-					bCloseBrackets.Background = Brushes.GreenYellow;
-					break;
-				case Key.OemPipe:
-					bPipe.Background = Brushes.GreenYellow;
-					break;
-				case Key.A:
-					bA.Background = Brushes.Pink;
-					break;
-				case Key.S:
-					bS.Background = Brushes.Yellow;
-					break;
-				case Key.D:
-					bD.Background = Brushes.GreenYellow;
-					break;
-				case Key.F:
-					bF.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.G:
-					bG.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.H:
-					bH.Background = Brushes.MediumPurple;
-					break;
-				case Key.J:
-					bJ.Background = Brushes.MediumPurple;
-					break;
-				case Key.K:
-					bK.Background = Brushes.Pink;
-					break;
-				case Key.L:
-					bL.Background = Brushes.Yellow;
-					break;
-				case Key.OemSemicolon:
-					bSemicolon.Background = Brushes.GreenYellow;
-					break;
-				case Key.OemQuotes:
-					bQuotes.Background = Brushes.GreenYellow;
-					break;
-				case Key.Enter:
-					bEnter.Background = Brushes.LightGray;
-					break;
-				case Key.LeftShift:
-					isShift = false;
-					bLShift.Background = Brushes.LightGray;
-					break;
-				case Key.Z:
-					bZ.Background = Brushes.Pink;
-					break;
-				case Key.X:
-					bX.Background = Brushes.Yellow;
-					break;
-				case Key.C:
-					bC.Background = Brushes.GreenYellow;
-					break;
-				case Key.V:
-					bV.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.B:
-					bB.Background = Brushes.DeepSkyBlue;
-					break;
-				case Key.N:
-					bN.Background = Brushes.MediumPurple;
-					break;
-				case Key.M:
-					bM.Background = Brushes.MediumPurple;
-					break;
-				case Key.OemComma:
-					bComma.Background = Brushes.Pink;
-					break;
-				case Key.OemPeriod:
-					bPeriod.Background = Brushes.Yellow;
-					break;
-				case Key.OemQuestion:
-					bQuestion.Background = Brushes.GreenYellow;
-					break;
-				case Key.RightShift:
-					isShift = false;
-					bRShift.Background = Brushes.LightGray;
-					Keyboard();
-					break;
-				case Key.LeftCtrl:
-					bLCtrl.Background = Brushes.LightGray;
-					break;
-				case Key.LWin:
-					bLWin.Background = Brushes.LightGray;
-					break;
-				case Key.LeftAlt:
-					bLAlt.Background = Brushes.LightGray;
-					break;
-				case Key.Space:
-					bSpace.Background = Brushes.BurlyWood;
-					break;
-				case Key.RightAlt:
-					bRalt.Background = Brushes.LightGray;
-					break;
-				case Key.RightCtrl:
-					bRCtrl.Background = Brushes.LightGray;
-					break;
+				switch (e.Key)
+				{
+					case Key.OemTilde:
+						bTilda.Background = Brushes.Pink;
+						break;
+					case Key.D1:
+						b1.Background = Brushes.Pink;
+						break;
+					case Key.D2:
+						b2.Background = Brushes.Pink;
+						break;
+					case Key.D3:
+						b3.Background = Brushes.Yellow;
+						break;
+					case Key.D4:
+						b4.Background = Brushes.GreenYellow;
+						break;
+					case Key.D5:
+						b5.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.D6:
+						b6.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.D7:
+						b7.Background = Brushes.MediumPurple;
+						break;
+					case Key.D8:
+						b8.Background = Brushes.MediumPurple;
+						break;
+					case Key.D9:
+						b9.Background = Brushes.Pink;
+						break;
+					case Key.D0:
+						b0.Background = Brushes.Yellow;
+						break;
+					case Key.OemMinus:
+						bMinus.Background = Brushes.GreenYellow;
+						break;
+					case Key.OemPlus:
+						bPlus.Background = Brushes.GreenYellow;
+						break;
+					case Key.Back:
+						bBackspace.Background = Brushes.LightGray;
+						break;
+					case Key.Tab:
+						bTab.Background = Brushes.LightGray;
+						break;
+					case Key.Q:
+						bQ.Background = Brushes.Pink;
+						break;
+					case Key.W:
+						bW.Background = Brushes.Yellow;
+						break;
+					case Key.E:
+						bE.Background = Brushes.GreenYellow;
+						break;
+					case Key.R:
+						bR.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.T:
+						bT.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.Y:
+						bY.Background = Brushes.MediumPurple;
+						break;
+					case Key.U:
+						bU.Background = Brushes.MediumPurple;
+						break;
+					case Key.I:
+						bI.Background = Brushes.Pink;
+						break;
+					case Key.O:
+						bO.Background = Brushes.Yellow;
+						break;
+					case Key.P:
+						bP.Background = Brushes.GreenYellow;
+						break;
+					case Key.OemOpenBrackets:
+						bOpenBrackets.Background = Brushes.GreenYellow;
+						break;
+					case Key.OemCloseBrackets:
+						bCloseBrackets.Background = Brushes.GreenYellow;
+						break;
+					case Key.OemPipe:
+						bPipe.Background = Brushes.GreenYellow;
+						break;
+					case Key.A:
+						bA.Background = Brushes.Pink;
+						break;
+					case Key.S:
+						bS.Background = Brushes.Yellow;
+						break;
+					case Key.D:
+						bD.Background = Brushes.GreenYellow;
+						break;
+					case Key.F:
+						bF.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.G:
+						bG.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.H:
+						bH.Background = Brushes.MediumPurple;
+						break;
+					case Key.J:
+						bJ.Background = Brushes.MediumPurple;
+						break;
+					case Key.K:
+						bK.Background = Brushes.Pink;
+						break;
+					case Key.L:
+						bL.Background = Brushes.Yellow;
+						break;
+					case Key.OemSemicolon:
+						bSemicolon.Background = Brushes.GreenYellow;
+						break;
+					case Key.OemQuotes:
+						bQuotes.Background = Brushes.GreenYellow;
+						break;
+					case Key.Enter:
+						bEnter.Background = Brushes.LightGray;
+						break;
+					case Key.LeftShift:
+						isShift = false;
+						ShowKeyboard();
+						bLShift.Background = Brushes.LightGray;
+						break;
+					case Key.Z:
+						bZ.Background = Brushes.Pink;
+						break;
+					case Key.X:
+						bX.Background = Brushes.Yellow;
+						break;
+					case Key.C:
+						bC.Background = Brushes.GreenYellow;
+						break;
+					case Key.V:
+						bV.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.B:
+						bB.Background = Brushes.DeepSkyBlue;
+						break;
+					case Key.N:
+						bN.Background = Brushes.MediumPurple;
+						break;
+					case Key.M:
+						bM.Background = Brushes.MediumPurple;
+						break;
+					case Key.OemComma:
+						bComma.Background = Brushes.Pink;
+						break;
+					case Key.OemPeriod:
+						bPeriod.Background = Brushes.Yellow;
+						break;
+					case Key.OemQuestion:
+						bQuestion.Background = Brushes.GreenYellow;
+						break;
+					case Key.RightShift:
+						isShift = false;
+						bRShift.Background = Brushes.LightGray;
+						ShowKeyboard();
+						break;
+					case Key.LeftCtrl:
+						bLCtrl.Background = Brushes.LightGray;
+						break;
+					case Key.LWin:
+						bLWin.Background = Brushes.LightGray;
+						break;
+					case Key.LeftAlt:
+						bLAlt.Background = Brushes.LightGray;
+						break;
+					case Key.Space:
+						bSpace.Background = Brushes.BurlyWood;
+						break;
+					case Key.RightAlt:
+						bRalt.Background = Brushes.LightGray;
+						break;
+					case Key.RightCtrl:
+						bRCtrl.Background = Brushes.LightGray;
+						break;
+				}
+			}
+			else
+			{
+				switch (e.Key)
+				{
+					case Key.LeftShift:
+						isShift = false;
+						ShowKeyboard();
+						bLShift.Background = Brushes.LightGray;
+						break;
+					case Key.RightShift:
+						isShift = false;
+						bRShift.Background = Brushes.LightGray;
+						ShowKeyboard();
+						break;
+				}
 			}
 		}
 
@@ -943,15 +1456,64 @@ namespace WpfApp1
 
 		private void buttonStart_Click(object sender, RoutedEventArgs e)
 		{
+			difficulty.IsEnabled = false;
 			buttonStart.IsEnabled = false;
 			buttonStop.IsEnabled = true;
+			isOnKeyboard = true;
+			caseSensitive.IsEnabled = false;
+			OriginalString();
+
+		}
+
+		private void OriginalString()
+		{
+			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
+			for (int index = 1; originalKey.Text.Length < 48; index++)
+			{
+				if (!isSensitive)
+				{
+					char symbol = (char)symbolNumber.Next(97, 122);
+					originalKey.Text += symbol;
+					if (index % difficulty.Value == 0)
+					{
+						originalKey.Text += " ";
+						originalKey.Text += symbol;
+						++index;
+					}
+				}
+				else
+				{
+					char symbol = (char)symbolNumber.Next(33, 126);
+					originalKey.Text += symbol;
+					if (index % difficulty.Value == 0)
+					{
+						originalKey.Text += " ";
+						originalKey.Text += symbol;
+						++index;
+					}
+				}
+			}
 		}
 
 		private void buttonStop_Click(object sender, RoutedEventArgs e)
 		{
+			difficulty.IsEnabled = true;
+			speed = 0;
+			fails = 0;
+			showSpeed.Text = speed.ToString();
+			showFails.Text = fails.ToString();
+			originalKey.Text = "";
+			userKey.Text = "";
+			isCapslock = false;
+			isOnKeyboard = false;
+			caseSensitive.IsEnabled = true;
 			buttonStart.IsEnabled = true;
 			buttonStop.IsEnabled = false;
 		}
 
+		private void caseSensitive_Checked(object sender, RoutedEventArgs e)
+		{
+			isSensitive = true;
+		}
 	}
 }
