@@ -53,6 +53,13 @@ namespace WpfApp1
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
 		{
 			isSensitive = true;
+			difficulty.Maximum = 34;
+		}
+
+		private void CaseSensitive_Unchecked(object sender, RoutedEventArgs e)
+		{
+			isSensitive = false;
+			difficulty.Maximum = 26;
 		}
 
 		private void Difficulty_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -67,18 +74,14 @@ namespace WpfApp1
 			{
 				if (!isSensitive)
 				{
-					char symbol = (char)symbolNumber.Next(97, 122);
+					int max = (int)difficulty.Value;
+					char symbol = (char)symbolNumber.Next(97, 97 + max);
 					originalKey.Text += symbol;
-					if (index % difficulty.Value == 0)
-					{
-						originalKey.Text += " ";
-						originalKey.Text += symbol;
-						++index;
-					}
 				}
 				else
 				{
-					char symbol = (char)symbolNumber.Next(33, 126);
+					int max = (int)difficulty.Value;
+					char symbol = (char)symbolNumber.Next(33, 33 + max);
 					originalKey.Text += symbol;
 					if (index % difficulty.Value == 0)
 					{
