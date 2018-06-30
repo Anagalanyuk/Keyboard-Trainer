@@ -1494,6 +1494,7 @@ namespace WpfApp1
 						bRCtrl.Background = Brushes.LightGray;
 						break;
 				}
+				progress.Value = userKey.Text.Length;
 			}
 			else
 			{
