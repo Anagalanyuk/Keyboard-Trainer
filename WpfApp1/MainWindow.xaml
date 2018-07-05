@@ -76,7 +76,7 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="speedLine" Background="DeepSkyBlue" FontSize="28" FontFamily="Consolas"/>
                     <TextBlock Grid.Row="0" x:Name="originalKey" FontSize="28" Width="683" HorizontalAlignment="Right"
-                                FontFamily="Consolas"/>
+                                FontFamily="Consolas" />
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <TextBlock Grid.Row="1" x:Name="userKey" FontSize="28" FontFamily="Consolas" HorizontalAlignment="Left"

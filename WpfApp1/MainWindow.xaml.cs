@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace WpfApp1
 {
@@ -68,32 +69,6 @@ namespace WpfApp1
 			showDifficulty.Text = difficulty.Value.ToString();
 		}
 
-		private void OriginalString()
-		{
-			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
-			for (int index = 1; originalKey.Text.Length < 43; index++)
-			{
-				if (!isSensitive)
-				{
-					int max = (int)difficulty.Value;
-					char symbol = (char)symbolNumber.Next(97, 97 + max);
-					originalKey.Text += symbol;
-				}
-				else
-				{
-					int max = (int)difficulty.Value;
-					char symbol = (char)symbolNumber.Next(33, 33 + max);
-					originalKey.Text += symbol;
-					if (index % difficulty.Value == 0)
-					{
-						originalKey.Text += " ";
-						originalKey.Text += symbol;
-						++index;
-					}
-				}
-			}
-		}
-
 		private void insertSymbol(char symbol)
 		{
 			userKey.Text += symbol;
@@ -114,6 +89,32 @@ namespace WpfApp1
 			{
 				fails += 1;
 				showFails.Text = fails.ToString();
+			}
+		}
+
+		private void OriginalString()
+		{
+			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
+			for (int index = 1; originalKey.Text.Length < 43; index++)
+			{
+				if (!isSensitive)
+				{
+					int max = (int)difficulty.Value;
+					char symbol = (char)symbolNumber.Next(97, 97 + max);
+					originalKey.Text += symbol;
+				}
+				else
+				{
+					int max = (int)difficulty.Value;
+					char symbol = (char)symbolNumber.Next(33, 35 + max);
+					originalKey.Text += symbol;
+					if (index % difficulty.Value == 0)
+					{
+						originalKey.Text += " ";
+						originalKey.Text += symbol;
+						++index;
+					}
+				}
 			}
 		}
 
@@ -738,12 +739,14 @@ namespace WpfApp1
 						if (!isCapslock)
 						{
 							bCapsLock.Background = Brushes.Gray;
-							insertSymbol(symbolCorrect);
+							isCapslock = true;
+							ShowKeyboard();
 						}
 						else
 						{
 							bCapsLock.Background = Brushes.LightGray;
-							insertSymbol(symbolCorrect);
+							isCapslock = false;
+							ShowKeyboard();
 						}
 						break;
 					case Key.A:
