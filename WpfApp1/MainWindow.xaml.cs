@@ -16,7 +16,6 @@ namespace WpfApp1
 			InitializeComponent();
 		}
 		private int fails;
-		private bool isBackspace = false;
 		private bool isCapslock = false;
 		private bool isOnKeyboard = false;
 		private bool isSensitive;
@@ -33,6 +32,11 @@ namespace WpfApp1
 			difficulty.IsEnabled = false;
 			isOnKeyboard = true;
 			OriginalString();
+
+			DispatcherTimer speed = new DispatcherTimer();
+			speed.Interval = TimeSpan.FromSeconds(1);
+			speed.Tick += Speed;
+			speed.Start();
 		}
 
 		private void ButtonStop_Click(object sender, RoutedEventArgs e)
@@ -77,12 +81,19 @@ namespace WpfApp1
 			isSpeed = true;
 		}
 
+
+		private void Speed(object sender, EventArgs e)
+		{
+			speed = speed * 60;
+			showSpeed.Text = speed.ToString();
+			speed = 0;
+		}
+
 		private void SpeedFails()
 		{
 			if (isSpeed)
 			{
 				speed += 1;
-				showSpeed.Text = speed.ToString();
 				isSpeed = false;
 			}
 			else
@@ -95,9 +106,9 @@ namespace WpfApp1
 		private void OriginalString()
 		{
 			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
-			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " ;
-			string highDifficulty ="abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
-				                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
+			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' ";
+			string highDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
+								   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
 			int l1 = lowDifficulty.Length;
 			int h1 = highDifficulty.Length;
 			for (int index = 0; originalKey.Text.Length < 43; index++)
@@ -482,7 +493,6 @@ namespace WpfApp1
 						break;
 					case Key.Back:
 						bBackspace.Background = Brushes.Gray;
-						isBackspace = true;
 						break;
 					case Key.Tab:
 						bTab.Background = Brushes.Gray;
@@ -1188,11 +1198,7 @@ namespace WpfApp1
 					OriginalString();
 					userKey.Text = string.Empty; ;
 				}
-				if (!isBackspace)
-				{
-					SpeedFails();
-				}
-				isBackspace = false;
+				SpeedFails();
 			}
 			else
 			{
