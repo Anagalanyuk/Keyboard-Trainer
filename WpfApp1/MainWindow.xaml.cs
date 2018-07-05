@@ -43,10 +43,11 @@ namespace WpfApp1
 			fails = 0;
 			isCapslock = false;
 			isOnKeyboard = false;
-			originalKey.Text = "";
+			originalKey.Text = string.Empty;
+			speedLine.Text = string.Empty;
 			showFails.Text = fails.ToString();
-			showSpeed.Text = speed.ToString();
 			speed = 0;
+			showSpeed.Text = speed.ToString();
 			userKey.Text = "";
 		}
 
@@ -70,7 +71,7 @@ namespace WpfApp1
 		private void OriginalString()
 		{
 			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
-			for (int index = 1; originalKey.Text.Length < 48; index++)
+			for (int index = 1; originalKey.Text.Length < 43; index++)
 			{
 				if (!isSensitive)
 				{
@@ -91,6 +92,14 @@ namespace WpfApp1
 					}
 				}
 			}
+		}
+
+		private void insertSymbol(char symbol)
+		{
+			userKey.Text += symbol;
+			speedLine.Text += symbol;
+			originalKey.Text = originalKey.Text.Remove(0, 1);
+			isSpeed = true;
 		}
 
 		private void SpeedFails()
@@ -217,9 +226,9 @@ namespace WpfApp1
 		{
 			if (isOnKeyboard)
 			{
-				if (userKey.Text.Length == originalKey.Text.Length)
+				if (originalKey.Text.Length == 0)
 				{
-					userKey.Text = "";
+					userKey.Text = string.Empty;
 				}
 				switch (e.Key)
 				{
@@ -228,19 +237,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '~';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += "~";
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '`';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += "`";
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -249,19 +256,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '!';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '1';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -270,19 +275,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '@';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '2';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -291,19 +294,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '#';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '3';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -312,19 +313,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '$';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '4';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -333,19 +332,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '%';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '5';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 
@@ -355,19 +352,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '^';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '6';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -376,19 +371,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '&';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '7';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -397,19 +390,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '*';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '8';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -418,19 +409,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '(';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '9';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -439,19 +428,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = ')';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '0';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -460,19 +447,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '_';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '-';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -481,19 +466,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '+';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '=';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -509,19 +492,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'Q';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'q';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -530,19 +511,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'W';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'w';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -551,19 +530,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'E';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'e';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -572,19 +549,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'R';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'r';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -593,19 +568,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'T';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 't';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -614,19 +587,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'Y';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'y';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -635,19 +606,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'U';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'u';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -656,19 +625,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'I';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'i';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -677,19 +644,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'O';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'o';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -698,19 +663,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'P';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'p';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -719,19 +682,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '{';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '[';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -740,19 +701,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '}';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = ']';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -761,19 +720,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '|';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '\\';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -781,14 +738,12 @@ namespace WpfApp1
 						if (!isCapslock)
 						{
 							bCapsLock.Background = Brushes.Gray;
-							isCapslock = true;
-							ShowKeyboard();
+							insertSymbol(symbolCorrect);
 						}
 						else
 						{
 							bCapsLock.Background = Brushes.LightGray;
-							isCapslock = false;
-							ShowKeyboard();
+							insertSymbol(symbolCorrect);
 						}
 						break;
 					case Key.A:
@@ -796,19 +751,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'A';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'a';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -817,19 +770,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'S';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 's';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -838,19 +789,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'D';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'd';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -859,19 +808,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'F';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'f';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -880,19 +827,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'g';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'g';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -901,18 +846,16 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'H';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 							symbolCorrect = 'h';
-						if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+						if (symbolCorrect == originalKey.Text[0])
 						{
-							userKey.Text += symbolCorrect;
-							isSpeed = true;
+							insertSymbol(symbolCorrect);
 						}
 						break;
 					case Key.J:
@@ -920,19 +863,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'J';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'j';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -941,19 +882,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'K';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'k';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -962,19 +901,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'L';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'l';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							};
 						}
 						break;
@@ -983,19 +920,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = ':';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = ';';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1004,19 +939,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '\"';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '\'';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1033,19 +966,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'Z';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'z';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1054,19 +985,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'X';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'x';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1075,19 +1004,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'C';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'c';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1096,19 +1023,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'V';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'v';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1117,19 +1042,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'B';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'b';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1138,19 +1061,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'N';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'n';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1159,19 +1080,17 @@ namespace WpfApp1
 						if (isCapslock || isShift)
 						{
 							symbolCorrect = 'M';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = 'm';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1180,19 +1099,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '<';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = ',';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1201,19 +1118,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '>';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '.';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1222,19 +1137,17 @@ namespace WpfApp1
 						if (isShift)
 						{
 							symbolCorrect = '?';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						else
 						{
 							symbolCorrect = '/';
-							if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+							if (symbolCorrect == originalKey.Text[0])
 							{
-								userKey.Text += symbolCorrect;
-								isSpeed = true;
+								insertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1254,11 +1167,9 @@ namespace WpfApp1
 						break;
 					case Key.Space:
 						bSpace.Background = Brushes.Brown;
-						symbolCorrect = ' ';
-						if (symbolCorrect == originalKey.Text[userKey.Text.Length])
+						if (symbolCorrect == originalKey.Text[0])
 						{
-							userKey.Text += symbolCorrect;
-							isSpeed = true;
+							insertSymbol(symbolCorrect);
 						}
 						break;
 					case Key.RightAlt:
@@ -1268,11 +1179,12 @@ namespace WpfApp1
 						bRCtrl.Background = Brushes.Gray;
 						break;
 				}
-				if (userKey.Text.Length == originalKey.Text.Length)
+				if (originalKey.Text.Length == 0)
 				{
-					originalKey.Text = "";
+					speedLine.Text = string.Empty;
+					originalKey.Text = string.Empty;
 					OriginalString();
-					userKey.Text = "";
+					userKey.Text = string.Empty; ;
 				}
 				if (!isBackspace)
 				{
@@ -1497,7 +1409,6 @@ namespace WpfApp1
 						bRCtrl.Background = Brushes.LightGray;
 						break;
 				}
-				progress.Value = userKey.Text.Length;
 			}
 			else
 			{

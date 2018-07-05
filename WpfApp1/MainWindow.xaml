@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="440" Width="683" ResizeMode="CanMinimize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
+        Title="Keyboard Trainer" Height="440" Width="683" ResizeMode="CanMinimize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
@@ -68,10 +68,20 @@
                             FontSize="15" IsEnabled="False" Click="ButtonStop_Click"/>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Background="Aqua" Height="60">
-                <ProgressBar x:Name="progress" Width="670" Height="60" Minimum="0" Maximum="49" Opacity="0.5"/>
-                <TextBlock x:Name="originalKey" FontSize="25" Width="683" FontFamily="Consolas" VerticalAlignment="Top"/>
-                <TextBlock x:Name="userKey" FontSize="25" FontFamily="Consolas" VerticalAlignment ="Bottom"/>
+            <Grid Grid.Row="1" Background="Aqua" Height="60" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="speedLine" Background="DeepSkyBlue" FontSize="28" FontFamily="Consolas"/>
+                    <TextBlock Grid.Row="0" x:Name="originalKey" FontSize="28" Width="683" HorizontalAlignment="Right"
+                                FontFamily="Consolas"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Grid.Row="1" x:Name="userKey" FontSize="28" FontFamily="Consolas" HorizontalAlignment="Left"
+                                 Width="auto" Background="DeepSkyBlue"/>
+                </StackPanel>
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
