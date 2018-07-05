@@ -48,9 +48,8 @@
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <TextBlock Text="Difficulty: " FontSize="15"/>
                         <TextBlock x:Name="showDifficulty" Text="4" FontSize="15" FontWeight="Bold" Width="25"/>
-                        <Slider x:Name="difficulty" Minimum="4" Maximum="26" Width="70"
-                                Margin="0,3,0,0" ValueChanged="Difficulty_ValueChanged"
-                                SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1" TabIndex="2147483644"/>
+                        <Slider x:Name="difficulty" Minimum="4" Maximum="48" Width="70" ValueChanged="Difficulty_ValueChanged"
+                                SelectionEnd="100" IsSnapToTickEnabled="True" Interval="1" TabIndex="2147483644" Height="35" VerticalAlignment="Bottom"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Width="169">
                         <CheckBox x:Name="caseSensitive" Margin="3" Checked="CaseSensitive_Checked" Unchecked="CaseSensitive_Unchecked"/>

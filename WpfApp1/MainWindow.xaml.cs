@@ -55,13 +55,13 @@ namespace WpfApp1
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
 		{
 			isSensitive = true;
-			difficulty.Maximum = 34;
+			difficulty.Maximum = 95;
 		}
 
 		private void CaseSensitive_Unchecked(object sender, RoutedEventArgs e)
 		{
 			isSensitive = false;
-			difficulty.Maximum = 26;
+			difficulty.Maximum = 48;
 		}
 
 		private void Difficulty_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -95,25 +95,24 @@ namespace WpfApp1
 		private void OriginalString()
 		{
 			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
-			for (int index = 1; originalKey.Text.Length < 43; index++)
+			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " ;
+			string highDifficulty ="abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
+				                   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
+			int l1 = lowDifficulty.Length;
+			int h1 = highDifficulty.Length;
+			for (int index = 0; originalKey.Text.Length < 43; index++)
 			{
 				if (!isSensitive)
 				{
-					int max = (int)difficulty.Value;
-					char symbol = (char)symbolNumber.Next(97, 97 + max);
-					originalKey.Text += symbol;
+					int difficulty = (int)this.difficulty.Value;
+					int indexString = symbolNumber.Next(0, difficulty);
+					originalKey.Text += lowDifficulty[indexString];
 				}
 				else
 				{
-					int max = (int)difficulty.Value;
-					char symbol = (char)symbolNumber.Next(33, 35 + max);
-					originalKey.Text += symbol;
-					if (index % difficulty.Value == 0)
-					{
-						originalKey.Text += " ";
-						originalKey.Text += symbol;
-						++index;
-					}
+					int difficulty = (int)this.difficulty.Value;
+					int indexString = symbolNumber.Next(0, difficulty);
+					originalKey.Text += highDifficulty[indexString];
 				}
 			}
 		}
