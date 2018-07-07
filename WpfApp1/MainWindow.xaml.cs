@@ -18,7 +18,7 @@ namespace WpfApp1
 		private int fails;
 		private bool isCapslock = false;
 		private bool isOnKeyboard = false;
-		private bool isSensitive;
+		private bool isDifficulty;
 		private bool isShift = false;
 		private bool isSpeed = false;
 		private int speed;
@@ -58,13 +58,13 @@ namespace WpfApp1
 
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
 		{
-			isSensitive = true;
+			isDifficulty = true;
 			difficulty.Maximum = 95;
 		}
 
 		private void CaseSensitive_Unchecked(object sender, RoutedEventArgs e)
 		{
-			isSensitive = false;
+			isDifficulty = false;
 			difficulty.Maximum = 48;
 		}
 
@@ -73,14 +73,13 @@ namespace WpfApp1
 			showDifficulty.Text = difficulty.Value.ToString();
 		}
 
-		private void insertSymbol(char symbol)
+		private void InsertSymbol(char symbol)
 		{
 			userKey.Text += symbol;
 			speedLine.Text += symbol;
 			originalKey.Text = originalKey.Text.Remove(0, 1);
 			isSpeed = true;
 		}
-
 
 		private void Speed(object sender, EventArgs e)
 		{
@@ -113,7 +112,7 @@ namespace WpfApp1
 			int h1 = highDifficulty.Length;
 			for (int index = 0; originalKey.Text.Length < 43; index++)
 			{
-				if (!isSensitive)
+				if (!isDifficulty)
 				{
 					int difficulty = (int)this.difficulty.Value;
 					int indexString = symbolNumber.Next(0, difficulty);
@@ -245,12 +244,13 @@ namespace WpfApp1
 				{
 					case Key.OemTilde:
 						bTilda.Background = Brushes.DeepPink;
+						//foo(Key.OemTilde);
 						if (isShift)
 						{
 							symbolCorrect = '~';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -258,7 +258,7 @@ namespace WpfApp1
 							symbolCorrect = '`';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -269,7 +269,7 @@ namespace WpfApp1
 							symbolCorrect = '!';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -277,7 +277,7 @@ namespace WpfApp1
 							symbolCorrect = '1';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -288,7 +288,7 @@ namespace WpfApp1
 							symbolCorrect = '@';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -296,7 +296,7 @@ namespace WpfApp1
 							symbolCorrect = '2';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -307,7 +307,7 @@ namespace WpfApp1
 							symbolCorrect = '#';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -315,7 +315,7 @@ namespace WpfApp1
 							symbolCorrect = '3';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -326,7 +326,7 @@ namespace WpfApp1
 							symbolCorrect = '$';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -334,7 +334,7 @@ namespace WpfApp1
 							symbolCorrect = '4';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -345,7 +345,7 @@ namespace WpfApp1
 							symbolCorrect = '%';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -353,7 +353,7 @@ namespace WpfApp1
 							symbolCorrect = '5';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 
@@ -365,7 +365,7 @@ namespace WpfApp1
 							symbolCorrect = '^';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -373,7 +373,7 @@ namespace WpfApp1
 							symbolCorrect = '6';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -384,7 +384,7 @@ namespace WpfApp1
 							symbolCorrect = '&';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -392,7 +392,7 @@ namespace WpfApp1
 							symbolCorrect = '7';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -403,7 +403,7 @@ namespace WpfApp1
 							symbolCorrect = '*';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -411,7 +411,7 @@ namespace WpfApp1
 							symbolCorrect = '8';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -422,7 +422,7 @@ namespace WpfApp1
 							symbolCorrect = '(';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -430,7 +430,7 @@ namespace WpfApp1
 							symbolCorrect = '9';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -441,7 +441,7 @@ namespace WpfApp1
 							symbolCorrect = ')';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -449,7 +449,7 @@ namespace WpfApp1
 							symbolCorrect = '0';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -460,7 +460,7 @@ namespace WpfApp1
 							symbolCorrect = '_';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -468,7 +468,7 @@ namespace WpfApp1
 							symbolCorrect = '-';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -479,7 +479,7 @@ namespace WpfApp1
 							symbolCorrect = '+';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -487,7 +487,7 @@ namespace WpfApp1
 							symbolCorrect = '=';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -504,7 +504,7 @@ namespace WpfApp1
 							symbolCorrect = 'Q';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -512,7 +512,7 @@ namespace WpfApp1
 							symbolCorrect = 'q';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -523,7 +523,7 @@ namespace WpfApp1
 							symbolCorrect = 'W';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -531,7 +531,7 @@ namespace WpfApp1
 							symbolCorrect = 'w';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -542,7 +542,7 @@ namespace WpfApp1
 							symbolCorrect = 'E';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -550,7 +550,7 @@ namespace WpfApp1
 							symbolCorrect = 'e';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -561,7 +561,7 @@ namespace WpfApp1
 							symbolCorrect = 'R';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -569,7 +569,7 @@ namespace WpfApp1
 							symbolCorrect = 'r';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -580,7 +580,7 @@ namespace WpfApp1
 							symbolCorrect = 'T';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -588,7 +588,7 @@ namespace WpfApp1
 							symbolCorrect = 't';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -599,7 +599,7 @@ namespace WpfApp1
 							symbolCorrect = 'Y';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -607,7 +607,7 @@ namespace WpfApp1
 							symbolCorrect = 'y';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -618,7 +618,7 @@ namespace WpfApp1
 							symbolCorrect = 'U';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -626,7 +626,7 @@ namespace WpfApp1
 							symbolCorrect = 'u';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -637,7 +637,7 @@ namespace WpfApp1
 							symbolCorrect = 'I';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -645,7 +645,7 @@ namespace WpfApp1
 							symbolCorrect = 'i';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -656,7 +656,7 @@ namespace WpfApp1
 							symbolCorrect = 'O';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -664,7 +664,7 @@ namespace WpfApp1
 							symbolCorrect = 'o';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -675,7 +675,7 @@ namespace WpfApp1
 							symbolCorrect = 'P';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -683,7 +683,7 @@ namespace WpfApp1
 							symbolCorrect = 'p';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -694,7 +694,7 @@ namespace WpfApp1
 							symbolCorrect = '{';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -702,7 +702,7 @@ namespace WpfApp1
 							symbolCorrect = '[';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -713,7 +713,7 @@ namespace WpfApp1
 							symbolCorrect = '}';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -721,7 +721,7 @@ namespace WpfApp1
 							symbolCorrect = ']';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -732,7 +732,7 @@ namespace WpfApp1
 							symbolCorrect = '|';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -740,7 +740,7 @@ namespace WpfApp1
 							symbolCorrect = '\\';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -765,7 +765,7 @@ namespace WpfApp1
 							symbolCorrect = 'A';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -773,7 +773,7 @@ namespace WpfApp1
 							symbolCorrect = 'a';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -784,7 +784,7 @@ namespace WpfApp1
 							symbolCorrect = 'S';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -792,7 +792,7 @@ namespace WpfApp1
 							symbolCorrect = 's';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -803,7 +803,7 @@ namespace WpfApp1
 							symbolCorrect = 'D';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -811,7 +811,7 @@ namespace WpfApp1
 							symbolCorrect = 'd';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -822,7 +822,7 @@ namespace WpfApp1
 							symbolCorrect = 'F';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -830,7 +830,7 @@ namespace WpfApp1
 							symbolCorrect = 'f';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -841,7 +841,7 @@ namespace WpfApp1
 							symbolCorrect = 'g';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -849,7 +849,7 @@ namespace WpfApp1
 							symbolCorrect = 'g';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -860,14 +860,14 @@ namespace WpfApp1
 							symbolCorrect = 'H';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
 							symbolCorrect = 'h';
 						if (symbolCorrect == originalKey.Text[0])
 						{
-							insertSymbol(symbolCorrect);
+							InsertSymbol(symbolCorrect);
 						}
 						break;
 					case Key.J:
@@ -877,7 +877,7 @@ namespace WpfApp1
 							symbolCorrect = 'J';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -885,7 +885,7 @@ namespace WpfApp1
 							symbolCorrect = 'j';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -896,7 +896,7 @@ namespace WpfApp1
 							symbolCorrect = 'K';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -904,7 +904,7 @@ namespace WpfApp1
 							symbolCorrect = 'k';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -915,7 +915,7 @@ namespace WpfApp1
 							symbolCorrect = 'L';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -923,7 +923,7 @@ namespace WpfApp1
 							symbolCorrect = 'l';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							};
 						}
 						break;
@@ -934,7 +934,7 @@ namespace WpfApp1
 							symbolCorrect = ':';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -942,7 +942,7 @@ namespace WpfApp1
 							symbolCorrect = ';';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -953,7 +953,7 @@ namespace WpfApp1
 							symbolCorrect = '\"';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -961,7 +961,7 @@ namespace WpfApp1
 							symbolCorrect = '\'';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -980,7 +980,7 @@ namespace WpfApp1
 							symbolCorrect = 'Z';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -988,7 +988,7 @@ namespace WpfApp1
 							symbolCorrect = 'z';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -999,7 +999,7 @@ namespace WpfApp1
 							symbolCorrect = 'X';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1007,7 +1007,7 @@ namespace WpfApp1
 							symbolCorrect = 'x';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1018,7 +1018,7 @@ namespace WpfApp1
 							symbolCorrect = 'C';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1026,7 +1026,7 @@ namespace WpfApp1
 							symbolCorrect = 'c';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1037,7 +1037,7 @@ namespace WpfApp1
 							symbolCorrect = 'V';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1045,7 +1045,7 @@ namespace WpfApp1
 							symbolCorrect = 'v';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1056,7 +1056,7 @@ namespace WpfApp1
 							symbolCorrect = 'B';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1064,7 +1064,7 @@ namespace WpfApp1
 							symbolCorrect = 'b';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1075,7 +1075,7 @@ namespace WpfApp1
 							symbolCorrect = 'N';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1083,7 +1083,7 @@ namespace WpfApp1
 							symbolCorrect = 'n';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1094,7 +1094,7 @@ namespace WpfApp1
 							symbolCorrect = 'M';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1102,7 +1102,7 @@ namespace WpfApp1
 							symbolCorrect = 'm';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1113,7 +1113,7 @@ namespace WpfApp1
 							symbolCorrect = '<';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1121,7 +1121,7 @@ namespace WpfApp1
 							symbolCorrect = ',';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1132,7 +1132,7 @@ namespace WpfApp1
 							symbolCorrect = '>';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1140,7 +1140,7 @@ namespace WpfApp1
 							symbolCorrect = '.';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1151,7 +1151,7 @@ namespace WpfApp1
 							symbolCorrect = '?';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						else
@@ -1159,7 +1159,7 @@ namespace WpfApp1
 							symbolCorrect = '/';
 							if (symbolCorrect == originalKey.Text[0])
 							{
-								insertSymbol(symbolCorrect);
+								InsertSymbol(symbolCorrect);
 							}
 						}
 						break;
@@ -1181,7 +1181,7 @@ namespace WpfApp1
 						bSpace.Background = Brushes.Brown;
 						if (symbolCorrect == originalKey.Text[0])
 						{
-							insertSymbol(symbolCorrect);
+							InsertSymbol(symbolCorrect);
 						}
 						break;
 					case Key.RightAlt:
