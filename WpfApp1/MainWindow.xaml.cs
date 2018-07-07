@@ -15,12 +15,16 @@ namespace WpfApp1
 		{
 			InitializeComponent();
 		}
+		private readonly int countLetters = 48;
 		private int fails;
 		private bool isCapslock;
 		private bool isOnKeyboard;
 		private bool isDifficulty;
 		private bool isShift;
 		private bool isSpeed;
+		private readonly int maximumCountLetters = 95;
+		private readonly int minute = 60;
+		private readonly int originalStringLength = 43;
 		private int speed;
 		char symbolCorrect;
 
@@ -59,13 +63,13 @@ namespace WpfApp1
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
 		{
 			isDifficulty = true;
-			difficulty.Maximum = 95;
+			difficulty.Maximum = maximumCountLetters;
 		}
 
 		private void CaseSensitive_Unchecked(object sender, RoutedEventArgs e)
 		{
 			isDifficulty = false;
-			difficulty.Maximum = 48;
+			difficulty.Maximum = countLetters;
 		}
 
 		private void Difficulty_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -83,7 +87,7 @@ namespace WpfApp1
 
 		private void Speed(object sender, EventArgs e)
 		{
-			speed = speed * 60;
+			speed = speed * minute;
 			showSpeed.Text = speed.ToString();
 			speed = 0;
 		}
@@ -108,7 +112,7 @@ namespace WpfApp1
 			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' ";
 			string highDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
 								   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
-			for (int index = 0; originalKey.Text.Length < 43; index++)
+			for (int index = 0; originalKey.Text.Length < originalStringLength; index++)
 			{
 				if (!isDifficulty)
 				{
