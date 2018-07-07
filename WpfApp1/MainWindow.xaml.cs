@@ -26,7 +26,7 @@ namespace WpfApp1
 		private readonly int minute = 60;
 		private readonly int originalStringLength = 43;
 		private int speed;
-		char symbolCorrect;
+		private char symbolCorrect;
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
 		{
