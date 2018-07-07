@@ -18,7 +18,7 @@ namespace WpfApp1
 
 		private readonly int countLetters = 48;
 		private readonly int maximumCountLetters = 95;
-		private readonly int minute = 60;
+		private readonly int second = 15;
 		private readonly int originalStringLength = 43;
 
 		private int fails;
@@ -40,7 +40,7 @@ namespace WpfApp1
 			OriginalString();
 
 			DispatcherTimer speed = new DispatcherTimer();
-			speed.Interval = TimeSpan.FromSeconds(1);
+			speed.Interval = TimeSpan.FromSeconds(4);
 			speed.Tick += Speed;
 			speed.Start();
 		}
@@ -89,7 +89,7 @@ namespace WpfApp1
 
 		private void Speed(object sender, EventArgs e)
 		{
-			speed = speed * minute;
+			speed = speed * second;
 			showSpeed.Text = speed.ToString();
 			speed = 0;
 		}
