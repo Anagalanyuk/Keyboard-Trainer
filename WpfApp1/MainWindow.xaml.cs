@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace WpfApp1
+namespace KeyboardTrainer
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
