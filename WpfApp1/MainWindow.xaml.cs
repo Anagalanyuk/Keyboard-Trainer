@@ -108,8 +108,6 @@ namespace WpfApp1
 			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' ";
 			string highDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
 								   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
-			int l1 = lowDifficulty.Length;
-			int h1 = highDifficulty.Length;
 			for (int index = 0; originalKey.Text.Length < 43; index++)
 			{
 				if (!isDifficulty)
