@@ -15,16 +15,18 @@ namespace WpfApp1
 		{
 			InitializeComponent();
 		}
+
 		private readonly int countLetters = 48;
+		private readonly int maximumCountLetters = 95;
+		private readonly int minute = 60;
+		private readonly int originalStringLength = 43;
+
 		private int fails;
 		private bool isCapslock;
 		private bool isOnKeyboard;
 		private bool isDifficulty;
 		private bool isShift;
 		private bool isSpeed;
-		private readonly int maximumCountLetters = 95;
-		private readonly int minute = 60;
-		private readonly int originalStringLength = 43;
 		private int speed;
 		private char symbolCorrect;
 
