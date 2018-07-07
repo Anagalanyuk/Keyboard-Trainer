@@ -16,11 +16,11 @@ namespace WpfApp1
 			InitializeComponent();
 		}
 		private int fails;
-		private bool isCapslock = false;
-		private bool isOnKeyboard = false;
+		private bool isCapslock;
+		private bool isOnKeyboard;
 		private bool isDifficulty;
-		private bool isShift = false;
-		private bool isSpeed = false;
+		private bool isShift;
+		private bool isSpeed;
 		private int speed;
 		char symbolCorrect;
 
