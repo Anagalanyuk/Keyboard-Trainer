@@ -11,16 +11,14 @@ namespace KeyboardTrainer
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		public MainWindow()
-		{
-			InitializeComponent();
-		}
-
 		private readonly int countLetters = 48;
 		private readonly int maximumCountLetters = 95;
-		private readonly int second = 15;
+		private int second = 60;
 		private readonly int originalStringLength = 43;
-
+		//
+		int test;
+		int minute = 60;
+	    //
 		private int fails;
 		private bool isCapslock;
 		private bool isOnKeyboard;
@@ -29,6 +27,11 @@ namespace KeyboardTrainer
 		private bool isSpeed;
 		private int speed;
 		private char symbolCorrect;
+
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
 		{
@@ -40,7 +43,7 @@ namespace KeyboardTrainer
 			OriginalString();
 
 			DispatcherTimer speed = new DispatcherTimer();
-			speed.Interval = TimeSpan.FromSeconds(4);
+			speed.Interval = TimeSpan.FromSeconds(2);
 			speed.Tick += Speed;
 			speed.Start();
 		}
@@ -89,7 +92,29 @@ namespace KeyboardTrainer
 
 		private void Speed(object sender, EventArgs e)
 		{
-			speed = speed * second;
+			if(speed == 0)
+			{
+				//second /= 2;
+				speed = test;
+				speed = speed * (second /= 2);
+				minute -= 1;
+			}
+			else
+			{
+				second = 60;
+				minute = 60;
+				test = speed;
+				speed = speed * second;
+			}
+			//test = test * second;
+			if(minute != 50 && speed < test)
+			{
+				speed = test;
+			}
+			else if(minute == 0)
+			{
+				test = 0;
+			}
 			showSpeed.Text = speed.ToString();
 			speed = 0;
 		}
