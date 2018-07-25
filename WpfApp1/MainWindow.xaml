@@ -7,11 +7,16 @@
         mc:Ignorable="d"
         Title="Keyboard Trainer" Height="440" Width="683" ResizeMode="CanMinimize" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp">
     <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="243*"/>
+            <ColumnDefinition Width="371*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid ShowGridLines="False">
+        <Grid ShowGridLines="False" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -83,7 +88,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>

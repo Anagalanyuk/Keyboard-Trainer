@@ -6,20 +6,18 @@ using System.Windows.Threading;
 
 namespace KeyboardTrainer
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
+	 //<summary>
+	 //Interaction logic for MainWindow.xaml
+	 //</summary>
 	public partial class MainWindow : Window
 	{
 		private readonly int countLetters = 48;
 		private readonly int maximumCountLetters = 95;
-		private int second = 60;
+		private readonly int second = 60;
+		private int timeSpeed = 0;
 		private readonly int originalStringLength = 43;
-		//
-		int test;
-		int minute = 60;
-	    //
 		private int fails;
+		private int interval = 1;
 		private bool isCapslock;
 		private bool isOnKeyboard;
 		private bool isDifficulty;
@@ -27,6 +25,8 @@ namespace KeyboardTrainer
 		private bool isSpeed;
 		private int speed;
 		private char symbolCorrect;
+		private DispatcherTimer timer = new DispatcherTimer();
+
 
 		public MainWindow()
 		{
@@ -42,10 +42,9 @@ namespace KeyboardTrainer
 			isOnKeyboard = true;
 			OriginalString();
 
-			DispatcherTimer speed = new DispatcherTimer();
-			speed.Interval = TimeSpan.FromSeconds(2);
-			speed.Tick += Speed;
-			speed.Start();
+			timer.Interval = TimeSpan.FromSeconds(interval);
+			timer.Start();
+			timer.Tick += Speed;
 		}
 
 		private void ButtonStop_Click(object sender, RoutedEventArgs e)
@@ -63,6 +62,9 @@ namespace KeyboardTrainer
 			speed = 0;
 			showSpeed.Text = speed.ToString();
 			userKey.Text = "";
+			timer.Stop();
+			timeSpeed = 0;
+			buttonStart.Content = timeSpeed.ToString();
 		}
 
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
@@ -92,31 +94,15 @@ namespace KeyboardTrainer
 
 		private void Speed(object sender, EventArgs e)
 		{
-			if(speed == 0)
+			buttonStart.Content = timeSpeed.ToString();
+			timeSpeed ++;
+			int realTimeSpeed = (second / timeSpeed) * speed;
+			showSpeed.Text = realTimeSpeed.ToString();
+			if (timeSpeed == 60)
 			{
-				//second /= 2;
-				speed = test;
-				speed = speed * (second /= 2);
-				minute -= 1;
+				timeSpeed = 0;
+				speed = 0;
 			}
-			else
-			{
-				second = 60;
-				minute = 60;
-				test = speed;
-				speed = speed * second;
-			}
-			//test = test * second;
-			if(minute != 50 && speed < test)
-			{
-				speed = test;
-			}
-			else if(minute == 0)
-			{
-				test = 0;
-			}
-			showSpeed.Text = speed.ToString();
-			speed = 0;
 		}
 
 		private void SpeedFails()
@@ -273,7 +259,6 @@ namespace KeyboardTrainer
 				{
 					case Key.OemTilde:
 						bTilda.Background = Brushes.DeepPink;
-						//foo(Key.OemTilde);
 						if (isShift)
 						{
 							symbolCorrect = '~';
