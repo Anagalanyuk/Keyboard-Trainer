@@ -17,7 +17,6 @@ namespace KeyboardTrainer
 		private int timeSpeed = 0;
 		private readonly int originalStringLength = 43;
 		private int fails;
-		private int interval = 1;
 		private bool isCapslock;
 		private bool isOnKeyboard;
 		private bool isDifficulty;
@@ -28,9 +27,11 @@ namespace KeyboardTrainer
 		private DispatcherTimer timer = new DispatcherTimer();
 
 
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			timer.Tick += Speed;
 		}
 
 		private void ButtonStart_Click(object sender, RoutedEventArgs e)
@@ -42,9 +43,8 @@ namespace KeyboardTrainer
 			isOnKeyboard = true;
 			OriginalString();
 
-			timer.Interval = TimeSpan.FromSeconds(interval);
+			timer.Interval = TimeSpan.FromSeconds(2);
 			timer.Start();
-			timer.Tick += Speed;
 		}
 
 		private void ButtonStop_Click(object sender, RoutedEventArgs e)
@@ -64,7 +64,6 @@ namespace KeyboardTrainer
 			userKey.Text = "";
 			timer.Stop();
 			timeSpeed = 0;
-			buttonStart.Content = timeSpeed.ToString();
 		}
 
 		private void CaseSensitive_Checked(object sender, RoutedEventArgs e)
@@ -94,7 +93,6 @@ namespace KeyboardTrainer
 
 		private void Speed(object sender, EventArgs e)
 		{
-			buttonStart.Content = timeSpeed.ToString();
 			timeSpeed ++;
 			int realTimeSpeed = (second / timeSpeed) * speed;
 			showSpeed.Text = realTimeSpeed.ToString();
