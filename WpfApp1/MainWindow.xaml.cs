@@ -13,9 +13,8 @@ namespace KeyboardTrainer
 	{
 		private readonly int countLetters = 48;
 		private readonly int maximumCountLetters = 95;
-		private readonly int second = 60;
-		private int timeSpeed = 0;
 		private readonly int originalStringLength = 43;
+		private readonly int second = 60;
 		private int fails;
 		private bool isCapslock;
 		private bool isOnKeyboard;
@@ -24,9 +23,8 @@ namespace KeyboardTrainer
 		private bool isSpeed;
 		private int speed;
 		private char symbolCorrect;
+		private int timeSpeed = 0;
 		private DispatcherTimer timer = new DispatcherTimer();
-
-
 
 		public MainWindow()
 		{
