@@ -41,7 +41,7 @@ namespace KeyboardTrainer
 			isOnKeyboard = true;
 			OriginalString();
 
-			timer.Interval = TimeSpan.FromSeconds(2);
+			timer.Interval = TimeSpan.FromSeconds(1);
 			timer.Start();
 		}
 
@@ -120,7 +120,7 @@ namespace KeyboardTrainer
 			Random symbolNumber = new Random((int)DateTime.Now.Ticks);
 			string lowDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' ";
 			string highDifficulty = "abcdefghijklmnopqrstuvwxyz1234567890-=`[]\\,./;' " +
-								   "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
+								    "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+~{}|:\"<>?";
 			for (int index = 0; originalKey.Text.Length < originalStringLength; index++)
 			{
 				if (!isDifficulty)
